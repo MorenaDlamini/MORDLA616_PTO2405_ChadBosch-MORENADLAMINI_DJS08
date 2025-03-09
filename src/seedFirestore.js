@@ -15,13 +15,29 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Seeder Data (users and vans)
+// Users array
+const users = [
+    {
+        id: "123",
+        email: "dlamini@example.com",
+        password: "p123",
+        name: "Morena",
+    },
+    {
+        id: "456",
+        email: "b@b.com",
+        password: "p123",
+        name: "Bob",
+    }
+];
+
+// Vans array
 const vans = [
     {
         id: "1",
         name: "Modest Explorer",
         price: 60,
-        description: "The Modest Explorer is a van designed to get you out of the house and into nature. This beauty is equipped with solar panels, a composting toilet, a water tank and kitchenette. The idea is that you can pack up your home and escape for a weekend or even longer!",
+        description: "The Modest Explorer is a van designed to get you out of the house and into nature...",
         imageUrl: "https://assets.scrimba.com/advanced-react/react-router/modest-explorer.png",
         type: "simple",
         hostId: "123",
@@ -30,7 +46,7 @@ const vans = [
         id: "2",
         name: "Beach Bum",
         price: 80,
-        description: "Beach Bum is a van inspired by surfers and travelers. It was created to be a portable home away from home, but with some cool features in it you won't find in an ordinary camper.",
+        description: "Beach Bum is a van inspired by surfers and travelers...",
         imageUrl: "https://assets.scrimba.com/advanced-react/react-router/beach-bum.png",
         type: "rugged",
         hostId: "123",
@@ -39,7 +55,7 @@ const vans = [
         id: "3",
         name: "Reliable Red",
         price: 100,
-        description: "Reliable Red is a van that was made for travelling. The inside is comfortable and cozy, with plenty of space to stretch out in. There's a small kitchen, so you can cook if you need to. You'll feel like home as soon as you step out of it.",
+        description: "Reliable Red is a van that was made for travelling...",
         imageUrl: "https://assets.scrimba.com/advanced-react/react-router/reliable-red.png",
         type: "luxury",
         hostId: "456",
@@ -48,7 +64,7 @@ const vans = [
         id: "4",
         name: "Dreamfinder",
         price: 65,
-        description: "Dreamfinder is the perfect van to travel in and experience. With a ceiling height of 2.1m, you can stand up in this van and there is great head room. The floor is a beautiful glass-reinforced plastic (GRP) which is easy to clean and very hard wearing. A large rear window and large side windows make it really light inside and keep it well ventilated.",
+        description: "Dreamfinder is the perfect van to travel in and experience...",
         imageUrl: "https://assets.scrimba.com/advanced-react/react-router/dreamfinder.png",
         type: "simple",
         hostId: "789",
@@ -57,7 +73,7 @@ const vans = [
         id: "5",
         name: "The Cruiser",
         price: 120,
-        description: "The Cruiser is a van for those who love to travel in comfort and luxury. With its many windows, spacious interior and ample storage space, the Cruiser offers a beautiful view wherever you go.",
+        description: "The Cruiser is a van for those who love to travel in comfort and luxury...",
         imageUrl: "https://assets.scrimba.com/advanced-react/react-router/the-cruiser.png",
         type: "luxury",
         hostId: "789",
@@ -66,40 +82,23 @@ const vans = [
         id: "6",
         name: "Green Wonder",
         price: 70,
-        description: "With this van, you can take your travel life to the next level. The Green Wonder is a sustainable vehicle that's perfect for people who are looking for a stylish, eco-friendly mode of transport that can go anywhere.",
+        description: "With this van, you can take your travel life to the next level...",
         imageUrl: "https://assets.scrimba.com/advanced-react/react-router/green-wonder.png",
         type: "rugged",
         hostId: "123",
     },
 ];
 
-const user = {
-    id: "123",
-    email: "dlamini@example.com",
-    password: "p123", // 
-    name: "morena",
-};
-
-const user = {
-    id: "123",
-    email: "b@b.com",
-    password: "p123", // 
-    name: "Bob",
-};
-
 /**
- * A function to seed Firestore with initial data, including users and vans.
- * This is typically used for development purposes to populate the database with sample data.
- *
- * @async
- * @function seedFirestore
- * @throws {Error} If there is an error during the seeding process.
+ * Seeds Firestore with initial data, including multiple users and vans.
  */
 async function seedFirestore() {
     try {
-        // Add user document
-        await setDoc(doc(db, "users", user.id), user);
-        console.log(`User ${user.id} added!`);
+        // Add user documents
+        for (const user of users) {
+            await setDoc(doc(db, "users", user.id), user);
+            console.log(`User ${user.id} (${user.name}) added!`);
+        }
 
         // Add vans documents
         for (const van of vans) {
