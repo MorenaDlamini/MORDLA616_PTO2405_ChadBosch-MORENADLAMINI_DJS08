@@ -77,6 +77,13 @@ const user = {
     id: "123",
     email: "dlamini@example.com",
     password: "p123", // 
+    name: "morena",
+};
+
+const user = {
+    id: "123",
+    email: "b@b.com",
+    password: "p123", // 
     name: "Bob",
 };
 
