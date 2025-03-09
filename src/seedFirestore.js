@@ -76,7 +76,7 @@ const vans = [
 const user = {
     id: "123",
     email: "dlamini@example.com",
-    password: "p123", // 🔒 Consider hashing passwords in real apps!
+    password: "p123", // 
     name: "Bob",
 };
 
